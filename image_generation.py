@@ -24,6 +24,7 @@ def plot_stl(file_path, output_path_prefix, angleelev, angleazim, angleroll):
     ax.set_facecolor('black')
     plt.axis('off')
     plt.savefig(fr'images\{output_path_prefix}\{output_path_prefix}_{angleelev}_{angleazim}_{angleroll}.png', bbox_inches='tight', pad_inches=0)
+    plt.close('all')
 
 
 # for file in os.listdir('stl'):
@@ -35,7 +36,7 @@ angles=[]
 
 x = 0 
 
-while x < 40:
+while x < 100:
     angles.append((random.randint(-180, 180), random.randint(-180, 180), random.randint(-180, 180)))
     x += 1
 
