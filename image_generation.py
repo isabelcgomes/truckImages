@@ -12,7 +12,6 @@ import os
 import scipy as sp
 import cv2
    
-categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
 
 def plot_stl(file_path, output_path_prefix, angleelev, angleazim, angleroll):
     # Carregar o arquivo STL
@@ -69,13 +68,44 @@ def generate_random_zoom_image(path, cat, data, index):
     plt.savefig(fr'images\{cat}\{data[0:-4]}_zoom{index}.png', bbox_inches='tight', pad_inches=0)
     plt.close('all')
 
+def replace_background(foreground_path, background_path, output_path, threshold=200):
+    # Carregar imagens
+    foreground = Image.open(foreground_path).convert("RGBA")
+    background = Image.open(background_path).convert("RGBA")
+
+    # Redimensionar o fundo para o tamanho da imagem de primeiro plano
+    background = background.resize(foreground.size)
+
+    # Converter para arrays numpy
+    foreground_array = np.array(foreground)
+    background_array = np.array(background)
+
+    # Criar uma máscara para o fundo
+    r, g, b, a = foreground_array[:, :, 0], foreground_array[:, :, 1], foreground_array[:, :, 2], foreground_array[:, :, 3]
+    mask = (r > threshold) & (g > threshold) & (b > threshold)  # Ajuste o valor de threshold conforme necessário
+
+    # Substituir o fundo usando a máscara
+    result_array = background_array.copy()
+    result_array[mask] = foreground_array[mask]
+
+    # Converter de volta para imagem
+    result_image = Image.fromarray(result_array, "RGBA")
+
+    # Salvar a imagem resultante
+    result_image.save(output_path)
+
+
+categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
+
 angles = [(0, 0, 0), (90, 90, 0), (0, 90, 0), (90, 0, 0), (45, 0, 0), (0, 45, 0), (45, 90, 0), (90, 45, 0), (45, 45, 0)]
-angles=[]
 
 x = 0 
 
+for cat in categories:
+    os.makedirs(fr'images\{cat}')
+
 for cat in os.listdir(fr'images'):
-    while len(os.listdir(os.path.join(fr'images', cat))) < 1000:
+    while len(os.listdir(os.path.join(fr'images', cat))) < 2000:
 
         while x < 5:
             angles.append((random.randint(-180, 180), random.randint(-180, 180), random.randint(-180, 180)))
@@ -100,10 +130,20 @@ for cat in os.listdir(fr'images'):
                 os.remove(fr'images\{cat}\{image}')
 
 for cat in categories:
-    if len(os.listdir(os.path.join(fr'images', cat))) > 1000:
+    if len(os.listdir(os.path.join(fr'images', cat))) > 2000:
         not_removes = list(os.listdir(os.path.join(fr'images', cat)))
         removes = not_removes[:10:]
 
         for rem in not_removes:
             if rem not in removes:
                 os.remove(os.path.join(fr'images', cat, rem))
+
+
+background_images = [str(bg) for bg in os.listdir("background_images")]
+
+
+for cat in categories:
+    for image in os.listdir(fr'images\{cat}'):
+        num = random.randint(0, len(background_images)-1) 
+        replace_background(fr'images\{cat}\{image}', fr"background_images\{background_images[num]}", fr'images\{cat}\background_{image}')
+        
