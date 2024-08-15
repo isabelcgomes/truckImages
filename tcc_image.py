@@ -5,22 +5,22 @@ import cv2
 plt.figure(figsize=(15,8))
 plt.suptitle("Zooms diferentes para rotações da cabine", fontsize=18, y=0.95)
 
-datadir = 'images\zoom'
+datadir = 'background_images'
 category = os.listdir(datadir)
 
 # set number of columns (use 3 to demonstrate the change)
-ncols = 5
+ncols = 4
 # calculate number of rows
 nrows = len(category) // ncols + (len(category) % ncols > 0)
 
 n = 0
 
-path = os.path.join(datadir,"cabin")
+path = datadir
 
 images = list(os.listdir(path))
-images = images [:10:]
+# images = images [:10:]
 
-while n < 10:
+while n < len(images):
     ax = plt.subplot(2, ncols, n+1)
     ax.set_axis_off()
     # ax.set_title(f"{cat}")
@@ -30,4 +30,4 @@ while n < 10:
     n+=1
 
 
-plt.savefig('TCC_Zoom')
+plt.savefig('TCC_backgrounds')
