@@ -35,9 +35,11 @@ categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
 
 background_images = [str(bg) for bg in os.listdir("background_images")]
 
+for cat in categories:
+    os.makedirs(fr'images\bg\{cat}')
 
 for cat in categories:
     for image in os.listdir(fr'images\{cat}'):
         num = random.randint(0, len(background_images)-1) 
-        replace_background(fr'images\{cat}\{image}', fr"background_images\{background_images[num]}", fr'images\{cat}\background_{image}')
+        replace_background(fr'images\{cat}\{image}', fr"background_images\{background_images[num]}", fr'images\bg\{cat}\background_{image}')
         
