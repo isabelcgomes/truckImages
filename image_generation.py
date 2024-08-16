@@ -38,16 +38,15 @@ categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
 
 angles = [(0, 0, 0), (90, 90, 0), (0, 90, 0), (90, 0, 0), (45, 0, 0), (0, 45, 0), (45, 90, 0), (90, 45, 0), (45, 45, 0)]
 
+x = 0
+while x < 200:
+    angles.append((random.randint(-180, 180), random.randint(-180, 180), random.randint(-180, 180)))
+    x+=1
 
 
 for cat in categories:
     os.makedirs(fr'images\{cat}')
 
 for cat in os.listdir(fr'images'):
-    x = 0
-    while x < 200:
-        angles.append((random.randint(-180, 180), random.randint(-180, 180), random.randint(-180, 180)))
-        x+=1
-
-        for doubleangle in angles:
-            plot_stl(fr'CAD_Files\stl\{cat}.stl', fr"{cat}", doubleangle[0], doubleangle[1], doubleangle[2])
+    for doubleangle in angles:
+        plot_stl(fr'CAD_Files\stl\{cat}.stl', fr"{cat}", doubleangle[0], doubleangle[1], doubleangle[2])
