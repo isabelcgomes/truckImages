@@ -6,7 +6,7 @@ import cv2
 import matplotlib.patches as patches
 import random
 
-def generate_random_zoom_image(path, cat, data, index):
+def generate_random_zoom_image(path, cat, folder, data, index):
     img_array = cv2.imread(os.path.join(path,cat,data))
     Z = cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB)
 
@@ -39,18 +39,18 @@ def generate_random_zoom_image(path, cat, data, index):
 
     # Mostra a imagem
     plt.axis('off')
-    plt.savefig(fr'images\zoom\{cat}\{data[0:-4]}_zoom{index}.png', bbox_inches='tight', pad_inches=0)
+    plt.savefig(fr'{folder}\zoom\{cat}\{data[0:-4]}_zoom{index}.png', bbox_inches='tight', pad_inches=0)
     plt.close('all')
 
-categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
+# categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
 
-for cat in categories:
-    os.makedirs(fr'images\zoom\{cat}')
+# for cat in categories:
+#     os.makedirs(fr'images\zoom\{cat}')
 
-for cat in categories:
-    for file in os.listdir(fr"images\{cat}"):
-        i = 0
-        while i < 5:
-            generate_random_zoom_image(fr"images", cat, file, i)
-            print(fr'imagens para {file} geradas com sucesso')
-            i += 1
+# for cat in categories:
+#     for file in os.listdir(fr"images\{cat}"):
+#         i = 0
+#         while i < 5:
+#             generate_random_zoom_image(fr"images", cat, file, i)
+#             print(fr'imagens para {file} geradas com sucesso')
+#             i += 1
