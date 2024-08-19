@@ -10,6 +10,7 @@ import remove_all_black_or_white
 
 categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
 background_images = [str(bg) for bg in os.listdir("background_images")]
+angles = [(0, 0, 0), (90, 90, 0), (0, 90, 0), (90, 0, 0), (45, 0, 0), (0, 45, 0), (45, 90, 0), (90, 45, 0), (45, 45, 0)]
 
 for cat in categories:
     try:
@@ -21,7 +22,6 @@ for cat in categories:
 
 for cat in categories:
     if len(os.listdir(fr"images\{cat}")) < 2024:
-        angles = []
         diff = (2024 - len(os.listdir(fr"images\{cat}")))//3
         x = 0
         while x < diff:
