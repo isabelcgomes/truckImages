@@ -6,7 +6,7 @@ import cv2
 import matplotlib.patches as patches
 import random
 
-def generate_random_zoom_image(path, cat, folder, data, index):
+def generate_random_zoom_image(path, cat, data, index):
     img_array = cv2.imread(os.path.join(path,cat,data))
     Z = cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB)
 
@@ -39,7 +39,7 @@ def generate_random_zoom_image(path, cat, folder, data, index):
 
     # Mostra a imagem
     plt.axis('off')
-    plt.savefig(fr'{folder}\zoom\{cat}\{data[0:-4]}_zoom{index}.png', bbox_inches='tight', pad_inches=0)
+    plt.savefig(fr'{path}\zoom\{cat}\{data[0:-4]}_zoom{index}.png', bbox_inches='tight', pad_inches=0)
     plt.close('all')
 
 # categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
