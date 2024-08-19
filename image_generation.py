@@ -29,7 +29,7 @@ def plot_stl(file_path, output_path_prefix, angleelev, angleazim, angleroll):
     ax.view_init(elev=angleelev, azim=angleazim, roll=angleroll)
     ax.set_facecolor('black')
     plt.axis('off')
-    plt.savefig(fr'{output_path_prefix}\{output_path_prefix}_{angleelev}_{angleazim}_{angleroll}.png', bbox_inches='tight', pad_inches=0)
+    plt.savefig(fr'images\{output_path_prefix}\{output_path_prefix}_{angleelev}_{angleazim}_{angleroll}.png', bbox_inches='tight', pad_inches=0)
     plt.close('all')
 
 
@@ -48,8 +48,8 @@ for cat in categories:
     try:
         os.makedirs(fr'images\{cat}')
     except:
-        next
+        pass
 
 for cat in os.listdir(fr'images'):
     for doubleangle in angles:
-        plot_stl(fr'CAD_Files\stl\{cat}.stl', fr"images\{cat}", doubleangle[0], doubleangle[1], doubleangle[2])
+        plot_stl(fr'CAD_Files\stl\{cat}.stl', fr"{cat}", doubleangle[0], doubleangle[1], doubleangle[2])
