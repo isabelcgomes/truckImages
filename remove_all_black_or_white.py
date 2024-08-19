@@ -12,11 +12,11 @@ def remove_images(path, cat, image):
         os.remove(fr'{path}\{cat}\{image}')
 
 
-for cat in categories:
-    for image in os.listdir(fr'images\zoom\{cat}'):
-        im = Image.open(fr'images\zoom\{cat}\{image}') 
-        extrema = im.convert("L").getextrema()
-        if extrema != (0, 255):
-            print(f"Remove {image}")
-            os.remove(fr'images\zoom\{cat}\{image}')
+# for cat in categories:
+#     for image in os.listdir(fr'images\zoom\{cat}'):
+#         im = Image.open(fr'images\zoom\{cat}\{image}') 
+#         extrema = im.convert("L").getextrema()
+#         if extrema != (0, 255):
+#             print(f"Remove {image}")
+#             os.remove(fr'images\zoom\{cat}\{image}')
 

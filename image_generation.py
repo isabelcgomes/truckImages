@@ -34,22 +34,22 @@ def plot_stl(file_path, output_path_prefix, folder, angleelev, angleazim, angler
 
 
 
-categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
+# categories = [str(cat[0:-4]) for cat in os.listdir("CAD_Files\stl")]
 
-angles = [(0, 0, 0), (90, 90, 0), (0, 90, 0), (90, 0, 0), (45, 0, 0), (0, 45, 0), (45, 90, 0), (90, 45, 0), (45, 45, 0)]
+# angles = [(0, 0, 0), (90, 90, 0), (0, 90, 0), (90, 0, 0), (45, 0, 0), (0, 45, 0), (45, 90, 0), (90, 45, 0), (45, 45, 0)]
 
-x = 0
-while x < 200:
-    angles.append((random.randint(-180, 180), random.randint(-180, 180), random.randint(-180, 180)))
-    x+=1
+# x = 0
+# while x < 200:
+#     angles.append((random.randint(-180, 180), random.randint(-180, 180), random.randint(-180, 180)))
+#     x+=1
 
 
-for cat in categories:
-    try:
-        os.makedirs(fr'images\{cat}')
-    except:
-        pass
+# for cat in categories:
+#     try:
+#         os.makedirs(fr'images\{cat}')
+#     except:
+#         pass
 
-for cat in os.listdir(fr'images'):
-    for doubleangle in angles:
-        plot_stl(fr'CAD_Files\stl\{cat}.stl', fr"{cat}", "images", doubleangle[0], doubleangle[1], doubleangle[2])
+# for cat in os.listdir(fr'images'):
+#     for doubleangle in angles:
+#         plot_stl(fr'CAD_Files\stl\{cat}.stl', fr"{cat}", "images", doubleangle[0], doubleangle[1], doubleangle[2])
