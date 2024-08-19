@@ -41,8 +41,23 @@ for cat in categories:
         for image in os.listdir(fr'overimages\{cat}'):
             num = random.randint(0, len(background_images)-1) 
             image_generation_with_a_background.replace_background(fr'overimages\{cat}\{image}', fr"background_images\{background_images[num]}", fr'overimages\bg\{cat}\background_{image}')
+        for file in os.listdir(fr'overimages\bg\{cat}'):
+            os.rename(fr"overimages\bg\{cat}\{file}", fr"overimages\{cat}\{file}")
+        for file in os.listdir(fr'overimages\{cat}'):
+            os.rename(fr"overimages\{cat}\{file}", fr"images\{cat}\{file}")
     else:
         next
+
+for cat in categories:
+    os.rmdir(fr"overimages\{cat}")
+    os.rmdir(fr"overimages\zoom\{cat}")
+    os.rmdir(fr"overimages\bg\{cat}")
+
+os.rmdir(r"overimages\zoom")
+os.rmdir(r"overimages\bg")
+
+os.rmdir("overimages")
+
 
         
 
