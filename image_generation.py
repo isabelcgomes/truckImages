@@ -45,7 +45,10 @@ while x < 200:
 
 
 for cat in categories:
-    os.makedirs(fr'images\{cat}')
+    try:
+        os.makedirs(fr'images\{cat}')
+    except:
+        next
 
 for cat in os.listdir(fr'images'):
     for doubleangle in angles:
