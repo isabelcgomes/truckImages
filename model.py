@@ -68,11 +68,11 @@ inputs = keras.Input(shape=(128, 128, 3))
 
 x = base_model(inputs, training=False)
 x = keras.layers.GlobalAveragePooling2D()(x)
-x = tf.keras.layers.Dropout(0.3)(x)
+x = tf.keras.layers.Dropout(0.5)(x)
 
 outputs = keras.layers.Dense(10)(x)
 
-fine_tune_at = 100
+fine_tune_at = 50
 for layer in base_model.layers[:fine_tune_at]:
   layer.trainable =  False
 
@@ -85,8 +85,8 @@ model_tl.compile(optimizer=keras.optimizers.Adam(learning_rate=0.0001),
               loss=keras.losses.CategoricalCrossentropy(from_logits=True),
               metrics=['categorical_accuracy'])
 
-model_tl.fit(train_gen, epochs = 100,
-             callbacks=[EarlyStoppingAtMinLoss()],
+model_tl.fit(train_gen, epochs = 10,
+            #  callbacks=[EarlyStoppingAtMinLoss()],
              validation_data = val_gen
             )
 
