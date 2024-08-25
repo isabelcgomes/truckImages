@@ -56,7 +56,8 @@ val_gen   = generator.flow_from_directory(directory=datadir,
                                           subset='validation')
 
 
-
+print(len(train_gen))
+print(len(val_gen))
 base_model = keras.applications.Xception(
     weights="imagenet",
     input_shape=(128, 128, 3),
@@ -86,7 +87,7 @@ model_tl.compile(optimizer=keras.optimizers.Adam(learning_rate=0.0001),
               metrics=['categorical_accuracy'])
 
 model_tl.fit(train_gen, epochs = 10,
-            #  callbacks=[EarlyStoppingAtMinLoss()],
+            callbacks=[EarlyStoppingAtMinLoss()],
              validation_data = val_gen
             )
 
